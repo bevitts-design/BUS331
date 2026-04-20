@@ -1,567 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BUS331 · Investments · Interactive Activities</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --navy:     #0a1628;
-      --navy-mid: #112040;
-      --navy-lt:  #1a3060;
-      --gold:     #c9a84c;
-      --gold-lt:  #e8c97a;
-      --ice:      #d6e4f0;
-      --ice-dim:  #8faabf;
-      --white:    #f4f7fb;
-      --muted:    #6b8099;
-      --card-bg:  #0e1e38;
-      --border:   rgba(201,168,76,0.18);
-      --radius:   10px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BUS331 · Investment Project · Phases</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #0a1628;
+    --navy-mid:   #112240;
+    --navy-light: #1a3a5c;
+    --gold:       #c9a84c;
+    --gold-light: #e8c96d;
+    --ice:        #d6e4f0;
+    --ice-light:  #eaf3fb;
+    --white:      #ffffff;
+    --text-muted: #a8b8cc;
+    --success:    #2ecc71;
+  }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
-      background: var(--navy);
-      color: var(--white);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+  }
 
-    /* ── Background texture ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 70% 10%, rgba(201,168,76,0.07) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 80% at 10% 80%, rgba(26,48,96,0.6) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
+  .topbar {
+    background: var(--navy-mid);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    padding: 0.45rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-    /* ── Layout ── */
-    .wrap {
-      position: relative;
-      z-index: 1;
-      max-width: 1060px;
-      margin: 0 auto;
-      padding: 0 28px 80px;
-    }
+  .topbar-left { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--text-muted); }
+  .topbar-left span { color: var(--gold); }
 
-    /* ── Header ── */
-    header {
-      padding: 56px 0 44px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 52px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
+  header {
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 60%, #0d1f3c 100%);
+    border-bottom: 2px solid var(--gold);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+  }
 
-    .header-left {}
+  .hero-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3rem); color: var(--white); margin-bottom: 0.5rem; }
+  header h1 span { color: var(--gold); }
 
-    .course-tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .course-tag::before {
-      content: '';
-      display: inline-block;
-      width: 20px;
-      height: 1px;
-      background: var(--gold);
-    }
+  main { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.1;
-      letter-spacing: -0.01em;
-    }
+  .phase-section { margin-bottom: 4rem; }
 
-    h1 span {
-      color: var(--gold);
-    }
+  .phase-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
 
-    .subtitle {
-      margin-top: 10px;
-      font-size: 0.95rem;
-      color: var(--ice-dim);
-      font-weight: 300;
-      letter-spacing: 0.02em;
-    }
+  .phase-num { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--navy); background: var(--gold); padding: 0.18rem 0.5rem; border-radius: 3px; font-weight: 600; }
+  .phase-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--white); }
 
-    .header-meta {
-      text-align: right;
-    }
-    .header-meta p {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-      line-height: 1.9;
-    }
-    .header-meta p strong {
-      color: var(--ice-dim);
-      font-weight: 500;
-    }
+  /* Grid for Sub-sections */
+  .sub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.25rem;
+  }
 
-    /* ── Student instructions banner ── */
-    .instructions {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--gold);
-      border-radius: var(--radius);
-      padding: 16px 22px;
-      margin-bottom: 52px;
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-    }
-    .instructions-icon {
-      font-size: 1.1rem;
-      margin-top: 1px;
-      flex-shrink: 0;
-    }
-    .instructions p {
-      font-size: 0.875rem;
-      color: var(--ice-dim);
-      line-height: 1.6;
-    }
-    .instructions p strong {
-      color: var(--ice);
-      font-weight: 500;
-    }
+  .sub-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: transform 0.2s, border-color 0.2s;
+  }
 
-    /* ── Unit sections ── */
-    .unit {
-      margin-bottom: 52px;
-      opacity: 0;
-      transform: translateY(18px);
-      animation: fadeUp 0.5s ease forwards;
-    }
-    .unit:nth-child(1) { animation-delay: 0.05s; }
-    .unit:nth-child(2) { animation-delay: 0.12s; }
-    .unit:nth-child(3) { animation-delay: 0.19s; }
-    .unit:nth-child(4) { animation-delay: 0.26s; }
-    .unit:nth-child(5) { animation-delay: 0.33s; }
-    .unit:nth-child(6) { animation-delay: 0.40s; }
+  .sub-card:hover { border-color: var(--gold); transform: translateY(-2px); }
 
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
+  .sub-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--gold); margin-bottom: 0.5rem; display: block; }
+  .sub-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 0.75rem; }
+  .sub-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem; line-height: 1.5; }
 
-    .unit-header {
-      display: flex;
-      align-items: baseline;
-      gap: 16px;
-      margin-bottom: 18px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
-    }
+  .link-group { display: flex; flex-direction: column; gap: 0.5rem; }
+  
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    transition: 0.2s;
+  }
 
-    .unit-num {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.68rem;
-      color: var(--gold);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
+  .btn-primary { background: rgba(201,168,76,0.1); color: var(--gold); border: 1px solid var(--gold); }
+  .btn-primary:hover { background: var(--gold); color: var(--navy); }
+  
+  .btn-secondary { background: rgba(214,228,240,0.05); color: var(--ice); border: 1px solid rgba(214,228,240,0.2); }
+  .btn-secondary:hover { background: var(--ice); color: var(--navy); }
 
-    .unit-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: var(--white);
-      letter-spacing: -0.01em;
-    }
-
-    .unit-chapters {
-      font-size: 0.72rem;
-      font-family: 'DM Mono', monospace;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-      margin-left: auto;
-      white-space: nowrap;
-    }
-
-    /* ── Activity cards grid ── */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 14px;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px 22px 18px;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      transition: border-color 0.2s, background 0.2s, transform 0.2s;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(201,168,76,0.04) 0%, transparent 60%);
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-
-    .card:hover {
-      border-color: rgba(201,168,76,0.45);
-      background: #122448;
-      transform: translateY(-2px);
-    }
-    .card:hover::after { opacity: 1; }
-
-    .card.placeholder {
-      opacity: 0.5;
-      cursor: default;
-    }
-    .card.placeholder:hover {
-      transform: none;
-      border-color: var(--border);
-      background: var(--card-bg);
-    }
-    .card.placeholder::after { display: none; }
-
-    .card-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .card-chapter {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      color: var(--gold);
-      text-transform: uppercase;
-    }
-
-    .card-status {
-      font-size: 0.6rem;
-      font-family: 'DM Mono', monospace;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 2px 8px;
-      border-radius: 20px;
-    }
-    .status-available {
-      background: rgba(201,168,76,0.12);
-      color: var(--gold-lt);
-      border: 1px solid rgba(201,168,76,0.3);
-    }
-    .status-coming {
-      background: rgba(107,128,153,0.12);
-      color: var(--muted);
-      border: 1px solid rgba(107,128,153,0.2);
-    }
-
-    .card-title {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--ice);
-      line-height: 1.35;
-    }
-
-    .card-desc {
-      font-size: 0.78rem;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .card-footer {
-      margin-top: 6px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.72rem;
-      color: var(--muted);
-      font-family: 'DM Mono', monospace;
-    }
-    .card-footer svg {
-      width: 11px;
-      height: 11px;
-      opacity: 0.5;
-    }
-    .card:hover .card-footer { color: var(--gold-lt); }
-    .card:hover .card-footer svg { opacity: 0.8; }
-
-    /* ── Footer ── */
-    footer {
-      margin-top: 60px;
-      padding-top: 28px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    footer p {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-    }
-    .gold-dot {
-      display: inline-block;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--gold);
-      margin: 0 6px;
-      vertical-align: middle;
-      opacity: 0.6;
-    }
-  </style>
+  footer { text-align: center; border-top: 1px solid rgba(201,168,76,0.15); padding: 2rem; font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--text-muted); }
+</style>
 </head>
 <body>
-<div class="wrap">
 
-  <!-- Header -->
-  <header>
-    <div class="header-left">
-      <div class="course-tag">Endicott College · Finance</div>
-      <h1>BUS331 <span>Investments</span></h1>
-      <p class="subtitle">Interactive Excel Activities · Fall 2026</p>
-    </div>
-    <div class="header-meta">
-      <p><strong>Textbook</strong> Bodie, Kane &amp; Marcus</p>
-      <p><strong>Format</strong> Excel-based activities</p>
-      <p><strong>Time</strong> 30–35 min per activity</p>
-    </div>
-  </header>
-
-  <!-- Instructions -->
-  <div class="instructions">
-    <div class="instructions-icon">📋</div>
-    <p><strong>How to use these activities:</strong> Click any available activity to download the Excel student workbook. Complete all yellow input cells. Readings should be done before class — activities are completed during the class session. Submit your completed workbook to Canvas when finished.</p>
-  </div>
-
-  <!-- Unit 1 -->
-  <div class="unit">
-    <div class="unit-header">
-      <span class="unit-num">Unit 01</span>
-      <span class="unit-title">The Investment Environment &amp; Risk/Return</span>
-      <span class="unit-chapters">Ch. 1–2, 5</span>
-    </div>
-    <div class="cards">
-      <a href="activities/ch1-investment-environment.html" class="card">
-        <div class="card-top">
-          <span class="card-chapter">Ch. 1–2</span>
-          <span class="card-status status-available">Available</span>
-        </div>
-        <div class="card-title">Asset Classes &amp; Financial Markets</div>
-        <div class="card-desc">Classify securities, explore market structures, and analyze real holdings data.</div>
-        <div class="card-footer">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-          Open activity
-        </div>
-      </a>
-      <a href="activities/ch5-risk-return.html" class="card">
-        <div class="card-top">
-          <span class="card-chapter">Ch. 5</span>
-          <span class="card-status status-available">Available</span>
-        </div>
-        <div class="card-title">Risk, Return &amp; the Historical Record</div>
-        <div class="card-desc">Calculate holding period returns, arithmetic vs. geometric means, and standard deviation using real index data.</div>
-        <div class="card-footer">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-          Open activity
-        </div>
-      </a>
-    </div>
-  </div>
-
-  <!-- Unit 2 -->
-  <div class="unit">
-    <div class="unit-header">
-      <span class="unit-num">Unit 02</span>
-      <span class="unit-title">Portfolio Theory &amp; Diversification</span>
-      <span class="unit-chapters">Ch. 6–7</span>
-    </div>
-    <div class="cards">
-      <a href="activities/ch6-diversification.html" class="card">
-        <div class="card-top">
-          <span class="card-chapter">Ch. 6</span>
-          <span class="card-status status-available">Available</span>
-        </div>
-        <div class="card-title">Diversification &amp; Portfolio Risk</div>
-        <div class="card-desc">Build covariance matrices and explore how correlation drives portfolio standard deviation.</div>
-        <div class="card-footer">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-          Open activity
-        </div>
-      </a>
-      <a href="activities/ch7-capm.html" class="card">
-        <div class="card-top">
-          <span class="card-chapter">Ch. 7</span>
-          <span class="card-status status-available">Available</span>
-        </div>
-        <div class="card-title">Optimal Portfolio &amp; the Efficient Frontier</div>
-        <div class="card-desc">Use Solver to maximize the Sharpe ratio and map the efficient frontier with real tickers.</div>
-        <div class="card-footer">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-          Open activity
-        </div>
-      </a>
-    </div>
-  </div>
-
-  <!-- Unit 3 -->
-  <div class="unit">
-    <div class="unit-header">
-      <span class="unit-num">Unit 03</span>
-      <span class="unit-title">The CAPM &amp; Index Models</span>
-      <span class="unit-chapters">Ch. 8–9</span>
-    </div>
-    <div class="cards">
-      <a href="activities/ch8-index-model.html" class="card">
-        <div class="card-top">
-          <span class="card-chapter">Ch. 8</span>
-          <span class="card-status status-available">Available</span>
-        </div>
-        <div class="card-title">The Index Model &amp; Beta Estimation</div>
-        <div class="card-desc">Run regressions against the S&amp;P 500 to estimate alpha, beta, and R² for individual stocks.</div>
-        <div class="card-footer">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-          Open activity
-        </div>
-      </a>
-      <a href="#" class="card placeholder">
-        <div class="card-top">
-          <span class="card-chapter">Ch. 9</span>
-          <span class="card-status status-coming">Coming Soon</span>
-        </div>
-        <div class="card-title">CAPM &amp; the Security Market Line</div>
-        <div class="card-desc">Evaluate stocks relative to the SML and identify over/undervalued securities.</div>
-        <div class="card-footer">Available later in semester</div>
-      </a>
-    </div>
-  </div>
-
-  <!-- Unit 4 -->
-  <div class="unit">
-    <div class="unit-header">
-      <span class="unit-num">Unit 04</span>
-      <span class="unit-title">Fixed Income Securities</span>
-      <span class="unit-chapters">Ch. 14–16</span>
-    </div>
-    <div class="cards">
-      <a href="#" class="card placeholder">
-        <div class="card-top">
-          <span class="card-chapter">Ch. 14</span>
-          <span class="card-status status-coming">Coming Soon</span>
-        </div>
-        <div class="card-title">Bond Pricing &amp; Yields</div>
-        <div class="card-desc">Price bonds using PV functions, compute YTM, and analyze the price-yield relationship.</div>
-        <div class="card-footer">Available later in semester</div>
-      </a>
-      <a href="#" class="card placeholder">
-        <div class="card-top">
-          <span class="card-chapter">Ch. 15–16</span>
-          <span class="card-status status-coming">Coming Soon</span>
-        </div>
-        <div class="card-title">Duration, Convexity &amp; the Term Structure</div>
-        <div class="card-desc">Calculate Macaulay and modified duration, convexity, and construct a yield curve.</div>
-        <div class="card-footer">Available later in semester</div>
-      </a>
-    </div>
-  </div>
-
-  <!-- Unit 5 -->
-  <div class="unit">
-    <div class="unit-header">
-      <span class="unit-num">Unit 05</span>
-      <span class="unit-title">Equity Valuation</span>
-      <span class="unit-chapters">Ch. 17–18</span>
-    </div>
-    <div class="cards">
-      <a href="#" class="card placeholder">
-        <div class="card-top">
-          <span class="card-chapter">Ch. 17</span>
-          <span class="card-status status-coming">Coming Soon</span>
-        </div>
-        <div class="card-title">Macroeconomic &amp; Industry Analysis</div>
-        <div class="card-desc">Apply top-down analysis framework using real economic indicators and sector data.</div>
-        <div class="card-footer">Available later in semester</div>
-      </a>
-      <a href="#" class="card placeholder">
-        <div class="card-top">
-          <span class="card-chapter">Ch. 18</span>
-          <span class="card-status status-coming">Coming Soon</span>
-        </div>
-        <div class="card-title">DDM &amp; Relative Valuation</div>
-        <div class="card-desc">Value equities using the dividend discount model, P/E, and EV/EBITDA multiples.</div>
-        <div class="card-footer">Available later in semester</div>
-      </a>
-    </div>
-  </div>
-
-  <!-- Unit 6 -->
-  <div class="unit">
-    <div class="unit-header">
-      <span class="unit-num">Unit 06</span>
-      <span class="unit-title">Options, Futures &amp; Derivatives</span>
-      <span class="unit-chapters">Ch. 20–21</span>
-    </div>
-    <div class="cards">
-      <a href="#" class="card placeholder">
-        <div class="card-top">
-          <span class="card-chapter">Ch. 20</span>
-          <span class="card-status status-coming">Coming Soon</span>
-        </div>
-        <div class="card-title">Options Markets &amp; Payoff Diagrams</div>
-        <div class="card-desc">Build payoff and profit diagrams for calls, puts, and common option strategies.</div>
-        <div class="card-footer">Available later in semester</div>
-      </a>
-      <a href="#" class="card placeholder">
-        <div class="card-top">
-          <span class="card-chapter">Ch. 21</span>
-          <span class="card-status status-coming">Coming Soon</span>
-        </div>
-        <div class="card-title">Black-Scholes Option Pricing</div>
-        <div class="card-desc">Implement the Black-Scholes formula and explore how Greeks affect option value.</div>
-        <div class="card-footer">Available later in semester</div>
-      </a>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    <p>BUS331 · Investments · Endicott College<span class="gold-dot"></span>Fall 2026</p>
-    <p>Bodie, Kane &amp; Marcus · 12th Edition</p>
-  </footer>
-
+<div class="topbar">
+  <div class="topbar-left"><span>Endicott College</span> &nbsp;·&nbsp; Finance</div>
+  <div class="topbar-right">Fall 2026</div>
 </div>
+
+<header>
+  <div class="hero-label">BUS331 · Term Project</div>
+  <h1>Investment <span>Analysis Project</span></h1>
+  <p style="color: var(--text-muted); margin-top: 10px;">A comprehensive equity research and portfolio integration study.</p>
+</header>
+
+<main>
+
+  <section class="phase-section" id="phase1">
+    <div class="phase-header">
+      <span class="phase-num">PHASE 01</span>
+      <span class="phase-title">Proposal & Data Foundation</span>
+    </div>
+    <div class="sub-grid">
+      <div class="sub-card" style="grid-column: 1 / -1;">
+        <span class="sub-label">Project Launch</span>
+        <h3 class="sub-title">Company Selection & Preliminary Research</h3>
+        <p class="sub-desc">Identify your target firm, justify its selection based on market cap and liquidity, and establish the initial data set for your investment thesis.</p>
+        <div class="link-group" style="flex-direction: row;">
+          <a href="project/phase1-instructions.html" class="btn btn-primary">📖 View Instructions</a>
+          <a href="files/phase1-proposal-template.docx" class="btn btn-secondary">📥 Download Proposal Template</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="phase-section" id="phase2">
+    <div class="phase-header">
+      <span class="phase-num">PHASE 02</span>
+      <span class="phase-title">Detailed Analysis & Valuation</span>
+    </div>
+
+    <div class="sub-grid">
+      
+      <div class="sub-card">
+        <span class="sub-label">Section 2.1</span>
+        <h3 class="sub-title">Macroeconomic Analysis</h3>
+        <p class="sub-desc">Evaluate the "Top-Down" factors: GDP growth, interest rate environment, and inflation impact on your firm.</p>
+        <div class="link-group">
+          <a href="project/phase2-macro.html" class="btn btn-primary">🔗 Analysis Portal</a>
+          <a href="files/macro-data-sheet.xlsx" class="btn btn-secondary">📥 Resources (.xlsx)</a>
+        </div>
+      </div>
+
+      <div class="sub-card">
+        <span class="sub-label">Section 2.2</span>
+        <h3 class="sub-title">Industry & Sector Outlook</h3>
+        <p class="sub-desc">Analyze Porter's Five Forces and the industry life cycle stage for your chosen company.</p>
+        <div class="link-group">
+          <a href="project/phase2-industry.html" class="btn btn-primary">🔗 Analysis Portal</a>
+          <a href="files/industry-framework.pdf" class="btn btn-secondary">📥 Resources (.pdf)</a>
+        </div>
+      </div>
+
+      <div class="sub-card">
+        <span class="sub-label">Section 2.3</span>
+        <h3 class="sub-title">Financial Statement Analysis</h3>
+        <p class="sub-desc">Perform ratio analysis and common-size comparisons against key industry competitors.</p>
+        <div class="link-group">
+          <a href="project/phase2-financials.html" class="btn btn-primary">🔗 Analysis Portal</a>
+          <a href="files/ratio-template.xlsx" class="btn btn-secondary">📥 Resources (.xlsx)</a>
+        </div>
+      </div>
+
+      <div class="sub-card">
+        <span class="sub-label">Section 2.4</span>
+        <h3 class="sub-title">Risk & Beta Estimation</h3>
+        <p class="sub-desc">Regress stock returns against the S&P 500 to determine systematic risk and the cost of equity.</p>
+        <div class="link-group">
+          <a href="project/phase2-risk.html" class="btn btn-primary">🔗 Analysis Portal</a>
+          <a href="files/beta-calc-guide.pdf" class="btn btn-secondary">📥 Resources (.pdf)</a>
+        </div>
+      </div>
+
+      <div class="sub-card">
+        <span class="sub-label">Section 2.5</span>
+        <h3 class="sub-title">Intrinsic Valuation (DCF)</h3>
+        <p class="sub-desc">Build a multi-stage Free Cash Flow to the Firm (FCFF) model to determine fair value.</p>
+        <div class="link-group">
+          <a href="project/phase2-valuation.html" class="btn btn-primary">🔗 Analysis Portal</a>
+          <a href="files/dcf-model-blank.xlsx" class="btn btn-secondary">📥 Resources (.xlsx)</a>
+        </div>
+      </div>
+
+      <div class="sub-card">
+        <span class="sub-label">Section 2.6</span>
+        <h3 class="sub-title">Final Recommendation</h3>
+        <p class="sub-desc">Synthesize your findings into a Buy/Hold/Sell rating with a structured investment pitch.</p>
+        <div class="link-group">
+          <a href="project/phase2-final.html" class="btn btn-primary">🔗 Analysis Portal</a>
+          <a href="files/final-report-rubric.pdf" class="btn btn-secondary">📥 Resources (.pdf)</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  BUS331 · Investments · Endicott College · Fall 2026
+</footer>
+
 </body>
 </html>
