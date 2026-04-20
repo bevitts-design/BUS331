@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BUS331 · Investment Project · Phases</title>
+<title>BUS331 · Investment Project · Analysis</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -51,64 +51,63 @@
   header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3rem); color: var(--white); margin-bottom: 0.5rem; }
   header h1 span { color: var(--gold); }
 
-  main { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+  main { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
 
-  .phase-section { margin-bottom: 4rem; }
-
-  .phase-header {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.65rem;
+  .section-header {
+    margin-bottom: 2rem;
+    padding-bottom: 0.75rem;
     border-bottom: 1px solid rgba(201,168,76,0.2);
+    text-align: left;
   }
 
-  .phase-num { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--navy); background: var(--gold); padding: 0.18rem 0.5rem; border-radius: 3px; font-weight: 600; }
-  .phase-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--white); }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--white); letter-spacing: 0.02em; }
 
-  /* Grid for Sub-sections */
+  /* Sub-section Grid */
   .sub-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.25rem;
+    gap: 1.5rem;
   }
 
   .sub-card {
     background: var(--navy-mid);
     border: 1px solid rgba(201,168,76,0.15);
     border-radius: 8px;
-    padding: 1.5rem;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
     transition: transform 0.2s, border-color 0.2s;
   }
 
-  .sub-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .sub-card:hover { border-color: var(--gold); transform: translateY(-3px); }
 
-  .sub-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--gold); margin-bottom: 0.5rem; display: block; }
-  .sub-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 0.75rem; }
-  .sub-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem; line-height: 1.5; }
+  .sub-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--gold); margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .sub-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 0.85rem; color: var(--white); }
+  .sub-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.6; flex-grow: 1; }
 
-  .link-group { display: flex; flex-direction: column; gap: 0.5rem; }
+  .link-group { display: flex; flex-direction: column; gap: 0.6rem; }
   
   .btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     text-decoration: none;
-    padding: 0.5rem 0.75rem;
+    padding: 0.6rem 0.8rem;
     border-radius: 4px;
     transition: 0.2s;
+    letter-spacing: 0.03em;
   }
 
-  .btn-primary { background: rgba(201,168,76,0.1); color: var(--gold); border: 1px solid var(--gold); }
-  .btn-primary:hover { background: var(--gold); color: var(--navy); }
+  .btn-primary { background: rgba(201,168,76,0.08); color: var(--gold); border: 1px solid rgba(201,168,76,0.4); }
+  .btn-primary:hover { background: var(--gold); color: var(--navy); border-color: var(--gold); }
   
-  .btn-secondary { background: rgba(214,228,240,0.05); color: var(--ice); border: 1px solid rgba(214,228,240,0.2); }
-  .btn-secondary:hover { background: var(--ice); color: var(--navy); }
+  .btn-secondary { background: rgba(214,228,240,0.03); color: var(--ice); border: 1px solid rgba(214,228,240,0.15); }
+  .btn-secondary:hover { background: var(--ice); color: var(--navy); border-color: var(--ice); }
 
-  footer { text-align: center; border-top: 1px solid rgba(201,168,76,0.15); padding: 2rem; font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--text-muted); }
+  footer { text-align: center; border-top: 1px solid rgba(201,168,76,0.15); padding: 2.5rem; font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--text-muted); }
 </style>
 </head>
 <body>
@@ -119,106 +118,76 @@
 </div>
 
 <header>
-  <div class="hero-label">BUS331 · Term Project</div>
-  <h1>Investment <span>Analysis Project</span></h1>
-  <p style="color: var(--text-muted); margin-top: 10px;">A comprehensive equity research and portfolio integration study.</p>
+  <div class="hero-label">BUS331 · Investments</div>
+  <h1>Investment <span>Project Portal</span></h1>
+  <p style="color: var(--text-muted); margin-top: 10px; font-size: 0.9rem;">Course project resources and analysis modules.</p>
 </header>
 
 <main>
 
-  <section class="phase-section" id="phase1">
-    <div class="phase-header">
-      <span class="phase-num">PHASE 01</span>
-      <span class="phase-title">Proposal & Data Foundation</span>
-    </div>
-    <div class="sub-grid">
-      <div class="sub-card" style="grid-column: 1 / -1;">
-        <span class="sub-label">Project Launch</span>
-        <h3 class="sub-title">Company Selection & Preliminary Research</h3>
-        <p class="sub-desc">Identify your target firm, justify its selection based on market cap and liquidity, and establish the initial data set for your investment thesis.</p>
-        <div class="link-group" style="flex-direction: row;">
-          <a href="project/phase1-instructions.html" class="btn btn-primary">📖 View Instructions</a>
-          <a href="files/phase1-proposal-template.docx" class="btn btn-secondary">📥 Download Proposal Template</a>
-        </div>
+  <div class="section-header">
+    <h2 class="section-title">Detailed Analysis & Valuations</h2>
+  </div>
+
+  <div class="sub-grid">
+    
+    <div class="sub-card">
+      <span class="sub-label">Section 01</span>
+      <h3 class="sub-title">Macroeconomic Analysis</h3>
+      <p class="sub-desc">Assess global and domestic economic indicators, interest rate trends, and the business cycle's impact on broad asset classes.</p>
+      <div class="link-group">
+        <a href="project/macro-analysis.html" class="btn btn-primary">🔗 Analysis Page</a>
+        <a href="files/macro-data-set.xlsx" class="btn btn-secondary">📥 Download Data (.xlsx)</a>
       </div>
     </div>
-  </section>
 
-  <section class="phase-section" id="phase2">
-    <div class="phase-header">
-      <span class="phase-num">PHASE 02</span>
-      <span class="phase-title">Detailed Analysis & Valuation</span>
+    <div class="sub-card">
+      <span class="sub-label">Section 02</span>
+      <h3 class="sub-title">Investment Policy Statements & Clients</h3>
+      <p class="sub-desc">Define client objectives, constraints, and risk tolerance. Develop a formal IPS to govern portfolio management decisions.</p>
+      <div class="link-group">
+        <a href="project/ips-client-profiles.html" class="btn btn-primary">🔗 Client Profiles</a>
+        <a href="files/ips-template.docx" class="btn btn-secondary">📥 IPS Template (.docx)</a>
+      </div>
     </div>
 
-    <div class="sub-grid">
-      
-      <div class="sub-card">
-        <span class="sub-label">Section 2.1</span>
-        <h3 class="sub-title">Macroeconomic Analysis</h3>
-        <p class="sub-desc">Evaluate the "Top-Down" factors: GDP growth, interest rate environment, and inflation impact on your firm.</p>
-        <div class="link-group">
-          <a href="project/phase2-macro.html" class="btn btn-primary">🔗 Analysis Portal</a>
-          <a href="files/macro-data-sheet.xlsx" class="btn btn-secondary">📥 Resources (.xlsx)</a>
-        </div>
+    <div class="sub-card">
+      <span class="sub-label">Section 03</span>
+      <h3 class="sub-title">Investment Project Bridge</h3>
+      <p class="sub-desc">Connect top-down macro findings to bottom-up security selection. Synthesize qualitative research into quantitative inputs.</p>
+      <div class="link-group">
+        <a href="project/project-bridge.html" class="btn btn-primary">🔗 Project Bridge</a>
+        <a href="files/bridge-framework.pdf" class="btn btn-secondary">📥 Methodology (.pdf)</a>
       </div>
-
-      <div class="sub-card">
-        <span class="sub-label">Section 2.2</span>
-        <h3 class="sub-title">Industry & Sector Outlook</h3>
-        <p class="sub-desc">Analyze Porter's Five Forces and the industry life cycle stage for your chosen company.</p>
-        <div class="link-group">
-          <a href="project/phase2-industry.html" class="btn btn-primary">🔗 Analysis Portal</a>
-          <a href="files/industry-framework.pdf" class="btn btn-secondary">📥 Resources (.pdf)</a>
-        </div>
-      </div>
-
-      <div class="sub-card">
-        <span class="sub-label">Section 2.3</span>
-        <h3 class="sub-title">Financial Statement Analysis</h3>
-        <p class="sub-desc">Perform ratio analysis and common-size comparisons against key industry competitors.</p>
-        <div class="link-group">
-          <a href="project/phase2-financials.html" class="btn btn-primary">🔗 Analysis Portal</a>
-          <a href="files/ratio-template.xlsx" class="btn btn-secondary">📥 Resources (.xlsx)</a>
-        </div>
-      </div>
-
-      <div class="sub-card">
-        <span class="sub-label">Section 2.4</span>
-        <h3 class="sub-title">Risk & Beta Estimation</h3>
-        <p class="sub-desc">Regress stock returns against the S&P 500 to determine systematic risk and the cost of equity.</p>
-        <div class="link-group">
-          <a href="project/phase2-risk.html" class="btn btn-primary">🔗 Analysis Portal</a>
-          <a href="files/beta-calc-guide.pdf" class="btn btn-secondary">📥 Resources (.pdf)</a>
-        </div>
-      </div>
-
-      <div class="sub-card">
-        <span class="sub-label">Section 2.5</span>
-        <h3 class="sub-title">Intrinsic Valuation (DCF)</h3>
-        <p class="sub-desc">Build a multi-stage Free Cash Flow to the Firm (FCFF) model to determine fair value.</p>
-        <div class="link-group">
-          <a href="project/phase2-valuation.html" class="btn btn-primary">🔗 Analysis Portal</a>
-          <a href="files/dcf-model-blank.xlsx" class="btn btn-secondary">📥 Resources (.xlsx)</a>
-        </div>
-      </div>
-
-      <div class="sub-card">
-        <span class="sub-label">Section 2.6</span>
-        <h3 class="sub-title">Final Recommendation</h3>
-        <p class="sub-desc">Synthesize your findings into a Buy/Hold/Sell rating with a structured investment pitch.</p>
-        <div class="link-group">
-          <a href="project/phase2-final.html" class="btn btn-primary">🔗 Analysis Portal</a>
-          <a href="files/final-report-rubric.pdf" class="btn btn-secondary">📥 Resources (.pdf)</a>
-        </div>
-      </div>
-
     </div>
-  </section>
+
+    <div class="sub-card">
+      <span class="sub-label">Section 04</span>
+      <h3 class="sub-title">Security Selection</h3>
+      <p class="sub-desc">Apply equity and fixed-income valuation models (DDM, DCF, Relative Valuation) to identify undervalued opportunities.</p>
+      <div class="link-group">
+        <a href="project/security-selection.html" class="btn btn-primary">🔗 Valuation Module</a>
+        <a href="files/valuation-models.xlsx" class="btn btn-secondary">📥 Model Sheets (.xlsx)</a>
+      </div>
+    </div>
+
+    <div class="sub-card">
+      <span class="sub-label">Section 05</span>
+      <h3 class="sub-title">Stress Test</h3>
+      <p class="sub-desc">Analyze portfolio sensitivity to extreme market events, tail risks, and correlation breakdowns to ensure resilience.</p>
+      <div class="link-group">
+        <a href="project/stress-test.html" class="btn btn-primary">🔗 Stress Scenario Portal</a>
+        <a href="files/stress-test-guide.pdf" class="btn btn-secondary">📥 Testing Guide (.pdf)</a>
+      </div>
+    </div>
+
+  </div>
 
 </main>
 
 <footer>
-  BUS331 · Investments · Endicott College · Fall 2026
+  BUS331 · Investments · Endicott College · Fall 2026<br>
+  Analysis Phase Materials
 </footer>
 
 </body>
